@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Table : MonoBehaviour {
 
     public GameObject prefab;
 
     // 5 cards per side
-    static public GameObject[] enemyCards = new GameObject[5];
-    static public GameObject[] playerCards = new GameObject[5];
+    static public GameObject[] enemyCards = new GameObject[3];
+    static public GameObject[] playerCards = new GameObject[3];
     // These numbers worked for me lol
     [SerializeField] int spacing = 150;
-    [SerializeField] int enemyY = 350;
-    [SerializeField] int playerY = 25;
+    [SerializeField] int enemyX = 1000;
+    [SerializeField] int playerX = 25;
 
 
     // Start is called before the first frame update
@@ -27,7 +28,7 @@ public class Table : MonoBehaviour {
                 enemyCards[i] = Instantiate(prefab);
                 enemyCards[i].GetComponent<Card>().setAtk(i + 1);
                 enemyCards[i].GetComponent<Card>().setHp(2 * i + 1);
-                enemyCards[i].transform.position = new Vector3(spacing * i, enemyY, 0);
+                enemyCards[i].transform.position = new Vector3(enemyX, (spacing * i) + 50, 0);
                 enemyCards[i].GetComponent<Card>().index = i;
                 enemyCards[i].GetComponent<Card>().isPlayer = false;
                 break;
@@ -42,7 +43,7 @@ public class Table : MonoBehaviour {
                 playerCards[i] = Instantiate(prefab);
                 playerCards[i].GetComponent<Card>().setAtk(i + 1);
                 playerCards[i].GetComponent<Card>().setHp(2 * i + 1);
-                playerCards[i].transform.position = new Vector3(spacing * i, playerY, 0);
+                playerCards[i].transform.position = new Vector3(playerX, (spacing * i) + 50, 0);
                 playerCards[i].GetComponent<Card>().index = i;
                 playerCards[i].GetComponent<Card>().isPlayer = true;
                 break;
