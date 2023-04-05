@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class AddEnemyButton : MonoBehaviour
 {
+    int difficulty;
+
+    public int difficulty_int;
+
+    public TextMeshPro Difficulty;
+
     Table table;
     [SerializeField] GameObject tableGoesHere;
 
@@ -15,13 +22,11 @@ public class AddEnemyButton : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
+        difficulty = Random.Range(1, 3);
+        table.addWave(difficulty);
+        difficulty_int = difficulty;
+        Difficulty.text = "Difficulty: " + difficulty_int.ToString();
     }
-
-    // Note: onMouseDown() requires object to have a collision component, with isTrigger = true
-    private void OnMouseDown() {
-        table.addEnemy();
-    }
-
 
     // Update is called once per frame
     void Update() {
